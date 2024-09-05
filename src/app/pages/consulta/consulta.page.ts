@@ -28,7 +28,8 @@ export class ConsultaPage implements OnInit {
   buscar() {
     this.peliculasFiltradas = 
       this.peliculasFiltradas.filter(
-        p => p.titulo.toUpperCase().includes(this.tituloBuscado.toUpperCase())
+        /*p => p.titulo.toUpperCase().includes(this.tituloBuscado.toUpperCase())*/
+        p => p.Title.toUpperCase().includes(this.tituloBuscado.toUpperCase())
       );
   }
 
