@@ -7,11 +7,15 @@ import { AppComponent } from './app/app.component';
 
 import { provideHttpClient } from '@angular/common/http';
 
+import { IonicStorageModule } from '@ionic/storage-angular'; //Almacenamiento.
+import { importProvidersFrom } from '@angular/core'; //Almacenamiento.
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient()
+    provideHttpClient(),
+    importProvidersFrom(IonicStorageModule.forRoot()) //Almacenamiento
   ],
 });

@@ -30,3 +30,9 @@
   </ion-list>
 </div>
 </ion-content>
+<ion-alert 
+  [isOpen]="borrando"
+  header="Alert!" 
+  subHeader="Alertita"
+  message="Borrandooooooo......"
+  [buttons]="alertButtons"(didDismiss)="ocultarDialogo()"></ion-alert>
