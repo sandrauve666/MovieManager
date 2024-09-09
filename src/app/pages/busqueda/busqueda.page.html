@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>consulta</ion-title>
+    <ion-title>Busqueda</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -42,4 +42,4 @@
 <ion-alert [isOpen]="noEncontrado" header="No hay coincidencias" subHeader="Movie Manager v1.0"
 message="No se ha encontrado ninguna película con el título '{{this.tituloBuscado}}'"></ion-alert>
 <ion-toast [isOpen]="guardado" message="{{mensaje}}"
-[duration]="3000" {didDismiss)="cerrarToast()"></ion-toast>
+[duration]="3000" (didDismiss)="cerrarToast()"></ion-toast>

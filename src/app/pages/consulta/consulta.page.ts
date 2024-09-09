@@ -5,6 +5,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonInput, I
 import { addIcons } from "ionicons";
 import { MoviesManagerService } from 'src/app/services/movies-manager.service';
 import { Movie } from 'src/app/interfaces/movie';
+import { heartSharp, heartOutline } from 'ionicons/icons';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-consulta',
@@ -15,16 +17,23 @@ import { Movie } from 'src/app/interfaces/movie';
 })
 export class ConsultaPage implements OnInit {
 
-  s = inject(MoviesManagerService);
+  moviesManagerService = inject(MoviesManagerService);
   tituloBuscado: string = "";
   peliculasFiltradas: Movie[];
   borrando: boolean = false;
+  peliculaParaBorrar: Movie | undefined;
+  verFavoritos: boolean | undefined;
+  //MoviesManagerService: any;
+
+  private activatedRoute = inject(ActivatedRoute);//PArametros del routing.
+  
   public ocultarDialogo(){
     this.borrando=false;
   }
-  eliminar() {
+  eliminar(pelicula: Movie) {
     console.error("Eliminando....");
     this.borrando = true;
+    this.peliculaParaBorrar = pelicula;
   }
 
   public alertButtons = [
@@ -33,6 +42,7 @@ export class ConsultaPage implements OnInit {
       role: 'cancel',
       handler: () => {
         console.log('Alert canceled');
+        this.peliculaParaBorrar = undefined;
       },
     },
     {
@@ -40,12 +50,13 @@ export class ConsultaPage implements OnInit {
       role: 'confirm',
       handler: () => {
         console.log('Alert confirmed');
+        this.moviesManagerService.deletePelicula(this.peliculaParaBorrar);
       },
     },
   ];
   
   constructor() {
-    this.peliculasFiltradas = this.s.getPeliculas();
+    this.peliculasFiltradas = this.moviesManagerService.getPeliculas();
   }
 
   ngOnInit() {
@@ -59,4 +70,9 @@ export class ConsultaPage implements OnInit {
       );
   }
 
+}
+
+public setFav(peliculaFavorita: Movie) {
+  peliculaFavorita.fav = !peliculaFavorita.fav;
+  this.moviesManagerService.
 }

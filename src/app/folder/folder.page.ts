@@ -12,10 +12,10 @@ import { addIcons } from "ionicons";
 })
 export class FolderPage implements OnInit {
   public folder!: string;
-  private activatedRoute = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);//PArametros del routing.
   constructor() {}
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;//PArametros del routing.
   }
 }

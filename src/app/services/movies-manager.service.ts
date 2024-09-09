@@ -9,6 +9,9 @@ const NODO_RAIZ = "peliculas";
   providedIn: 'root'
 })
 export class MoviesManagerService {
+  static deletePelicula(peliculaParaBorrar: Movie | undefined) {
+    throw new Error('Method not implemented.');
+  }
   private peliculas: Movie[] = [];
   constructor(private storage: Storage) {
     //this.rellenarArray();
@@ -65,12 +68,12 @@ export class MoviesManagerService {
     this.peliculas.push(p2);*/
     this.storage.get(NODO_RAIZ).
       then((peliculasDB) => {
-        console.log(peliculasDB);
+        console.log(peliculasDB.length);
         if (peliculasDB != null) {
           //let peliculas = new Array(); --> Del pdf, en este caso ya existe array inicial.
           //this.peliculas = data;
-          console.log(typeof peliculasDB);
-          peliculasDB.foreach((element: Movie) => {
+          console.log("Tipo:" + typeof peliculasDB);
+          peliculasDB.forEach((element: Movie) => {
             this.peliculas.push(element);
           });
         }
@@ -87,8 +90,16 @@ export class MoviesManagerService {
     }
   }
 
-  //Método provado para agregar la película a la bbdd local.
-  private guardarPelicula() {
+public deletePelicula(pelicula: Movie | undefined) {
+  if (pelicula != undefined) {
+    let posicionPeliculaBuscada = this.peliculas.indexOf(pelicula);
+    this.peliculas.splice(posicionPeliculaBuscada, 1);
+    this.guardarPelicula();
+  }
+}
+
+  //Método provado para agregar la película a la bbdd local. Antes era privado, ahora se ha cambiado a publico para que pueda usarse en Fav.
+  public guardarPelicula() {
     this.storage.get(NODO_RAIZ).
       then(() => { //Se borra data
         /*if (data == null) {
