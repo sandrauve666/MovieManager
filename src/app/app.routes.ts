@@ -30,5 +30,9 @@ export const routes: Routes = [
   {
     path: 'favoritos/:fav',
     loadComponent: () => import('./pages/consulta/consulta.page').then( m => m.ConsultaPage)
+  },
+  {
+    path: 'detalle/:imdbID',
+    loadComponent: () => import('./pages/detalle/detalle.page').then( m => m.DetallePage)
   }
 ];

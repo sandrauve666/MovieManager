@@ -70,9 +70,10 @@ export class ConsultaPage implements OnInit {
       );
   }
 
+  public setFav(peliculaFavorita: Movie) {
+    peliculaFavorita.fav = !peliculaFavorita.fav;
+    this.moviesManagerService.guardarPelicula();
+  }
 }
 
-public setFav(peliculaFavorita: Movie) {
-  peliculaFavorita.fav = !peliculaFavorita.fav;
-  this.moviesManagerService.
-}
+

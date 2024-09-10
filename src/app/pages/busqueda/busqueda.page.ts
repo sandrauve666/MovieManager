@@ -21,7 +21,7 @@ export class BusquedaPage implements OnInit {
   public noEncontrado: boolean = false; //Para el diálogo que avisa que no se ha encontrado  ninguna película.
   public mensaje: string = ""; //Para el toast.
   public guardado: boolean = false; //Para el toast.
-
+  public alertButtons = ['Cerrar'];
   constructor(private peliculasService: PeliculasService,
     private moviesManager: MoviesManagerService
   ) { }
@@ -46,7 +46,7 @@ export class BusquedaPage implements OnInit {
   buscar() {
     this.cargando = true;
     console.log("Buscando...." + this.tituloBuscado);
-    this.peliculasService.getMovie(this.tituloBuscado).subscribe(data => {
+    this.peliculasService.getMovies(this.tituloBuscado).subscribe(data => {
       this.cargando = false;
       if (data.Response === 'False') {//Response es específico de OMDB-API
         console.error("No he encontrado ninguna película");
